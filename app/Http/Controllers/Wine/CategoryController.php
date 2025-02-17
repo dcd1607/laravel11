@@ -23,7 +23,7 @@ class CategoryController extends Controller
     public function create(): View
 {
     return view('wine.category.create', [
-        'category' => new \App\Models\Category(), // Aquí creas una instancia vacía
+        'category' => new \App\Models\Category(),
         'action' => route('categories.store'),
         'method' => 'POST',
         'submit' => 'Create',
