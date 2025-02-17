@@ -1,0 +1,57 @@
+<form action="{{ $action }}" method="POST" enctype="multipart/form-data">
+    @csrf
+    @method($method)
+
+    <div class="mb-4">
+        <label for="name" class="block text-gray-700 dark:text-white text-sm font-bold mb-2">Nombre</label>
+        <input
+            type="text"
+            name="name"
+            id="name"
+            value="{{ old('name', $category->name) }}"
+            class="shadow appearance-none border rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline"
+        >
+        @error('name')
+            <p class="text-red-500 text-xs italic mt-2">{{ $message }}</p>
+        @enderror
+    </div>
+
+    <div class="mb-4">
+        <label for="image" class="block text-gray-700 dark:text-white text-sm font-bold mb-2">Imagen</label>
+        <input
+            type="file"
+            name="image"
+            id="image"
+            class="shadow appearance-none border rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline"
+        >
+        @error('image')
+            <p class="text-red-500 text-xs italic mt-2">{{ $message }}</p>
+        @enderror
+    </div>
+
+    <div class="mb-4">
+        <label for="description" class="block text-gray-700 dark:text-white text-sm font-bold mb-2">Descripcion</label>
+        <textarea
+            name="description"
+            id="description"
+            class="shadow appearance-none border rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline">{{ old('description', $category->description) }}</textarea>
+        @error('description')
+            <p class="text-red-500 text-xs italic mt-2">{{ $message }}</p>
+        @enderror
+    </div>
+
+    <div class="mb-4">
+        <a
+            href="{{ route('categories.index') }}"
+            class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded"
+        >
+            Cancelar
+        </a>
+        <button
+            type="submit"
+            class="bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded"
+        >
+            {{ $submit }}
+        </button>
+    </div>
+</form>
