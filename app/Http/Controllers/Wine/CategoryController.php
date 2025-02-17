@@ -21,12 +21,14 @@ class CategoryController extends Controller
         ]);
     }
     public function create(): View
-    {
-        return view('wine.category.create',[
-            'categories' => $this->repository->model(),
-            'action' => route('categories.store'),
-            'method' => 'POST',
-            'submit' => 'Create',
-        ]);
-    }
+{
+    return view('wine.category.create', [
+        'category' => new \App\Models\Category(),
+        'action' => route('categories.store'),
+        'method' => 'POST',
+        'submit' => 'Create',
+    ]);
+}
+
+
 }
