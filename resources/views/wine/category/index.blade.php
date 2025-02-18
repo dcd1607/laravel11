@@ -1,64 +1,59 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Categoría de vinos') }}
+            {{ __('Categoria de vinos') }}
         </h2>
     </x-slot>
 
     <div class="py-6">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-xl sm:rounded-lg">
-                <div class="p-6 text-gray-900 dark:text-gray-100">
+               <div class="p-6 text-gray-900 dark:text-gray-100">
                     <a 
                         href="{{ route('categories.create') }}" 
                         class="bg-purple-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
                         {{ 'Crear Categoría' }}
                     </a>
                     @if ($categories->isNotEmpty())
-                        <!-- Cambié a grid-cols-3 para que haya más espacio, puedes ajustarlo -->
-                        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mt-4">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
                             @foreach ($categories as $category)
-                                <div class="flex flex-col items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row md:max-w-xl hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700 relative">
+                                <div class="flex flex-col items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row md:max-w-xl hover_bg_gray_100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700 relative">
                                     <img
                                         class="object-cover w-full rounded-t-lg h-96 md:h-auto md:w-48 md:rounded-none md:rounded-s-lg"
                                         src="{{ $category->image_url }}"
                                         alt="{{ $category->name }}"
                                     />
-                                    <div class="p-4">
-                                        <h5 class="text-lg font-bold text-gray-900 dark:text-gray-100">{{ $category->name }}
-                                            <span class="text-sm font-normal text-gray-500 dark:text-white">{{ $category->wines_count }}
+                                <div>
+                                    <h5 class="text-lg font-bold text-gray-900 dark:text-gray-100">{{ $category->name }}
+                                        <span class="text-sm font-normal text-gray-500 dark:text-white">{{ $category->wines_count }}
                                             {{ __('Vinos(:count)', ['count'=> $category->wines_count]) }}
                                         </span>
-                                        </h5>
-                                        <p class="mb-3 font-normal text-gray-700 dark:text-gray-400 pb-5">{{ $category->description }}</p>
-                                        <div class="absolute bottom-0 right-0 p-4 flex justify-between">
-                                            <a 
-                                                href="{{ route('categories.edit', $category) }}" 
-                                                class="bg-purple-500 hover:bg-purple-700 text-white font-bold p-1 rounded mb-2 md:mb-0 text-center">
-                                                Editar
-                                            </a>
-                                            <form action="{{ route('categories.destroy', $category) }}" method="POST">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button 
-                                                    type="submit" 
-                                                    class="bg-red-500 hover:bg-red-700 text-white font-bold p-1 rounded mb-2 md:mb-0 text-center">
-                                                    Eliminar
-                                                </button>
-                                            </form>
-                                        </div>
-                                    </div>
+                                    </h5>
+                                    <p class="mb-3 font-normal text-gray-700 dark:text-gray-400 pb-5">{{ $category->description }}</p>
+                                    <div class="absolute bottom-0 right-0 p-4 flex justify-between">
+                                        <a 
+                                            href="{{ route('categories.edit', $category) }}" 
+                                            class="bg-purple-500 hover:bg-purple-700 text-white font-bold p-1 rounded mb-2 md:mb-0 text-center">
+                                            Editar
+                                        </a>
+                                        <form action="{{ route('categories.destroy', $category) }}" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button 
+                                                type="submit" 
+                                                class="bg-red-500 hover:bg-red-700 text-white font-bold p-1 rounded mb-2 md:mb-0 text-center">
+                                                Eliminar
+                                        </form>
                                 </div>
                             @endforeach
                         </div>
                     @else
                         <p class="mt-4 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
                             <strong class="font-bold">{{ '¡Lo siento!' }}</strong>
-                            <span class="block sm:inline">{{ 'No hay categorías de vino creadas' }}</span>
-                        </p>
+                            <span class="block sm:inline">{{ 'No hay categorias de vino creadas' }}</span>
                     @endif
-                </div>
+               </div>
             </div>
         </div>
-    </div>
+
 </x-app-layout>
