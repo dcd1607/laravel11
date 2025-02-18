@@ -21,10 +21,14 @@ class CategoryRequest extends FormRequest
      */
     public function rules(): array
     {
+        $imageRules = 'sometimes|image|mimes:jpeg,png,jpg,gif,svg|max:2048';
+        if($this->isMethod('post')){
+            $imageRules = 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048';
+        }
         return [
             'name' => 'required|string|max:255',
             'description' => 'required|string|max:2000',
-            'image' => 'sometimes|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'image' => $imageRules,
         ];
     }
 
