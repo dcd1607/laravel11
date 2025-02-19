@@ -52,4 +52,14 @@ class CategoryController extends Controller
         session()->flash('success', 'Categoria actualizada correctamente');
         return redirect()->route('categories.index');
     }
+
+    public function destroy(Category $category): RedirectResponse{
+        try {
+            $this->repository->delete($category);
+            session()->flash('success', 'Categoria eliminada correctamente');
+        } catch (\Exception $e) {
+            session()->flash('error', $e->getMessage());
+        }
+        return redirect()->route('categories.index');
+    }
 }
