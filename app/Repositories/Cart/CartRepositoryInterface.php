@@ -15,7 +15,7 @@ interface CartRepositoryInterface
 
     public function remove(int $wineId): void;
 
-    public function getTotalQuantityForWine(Wine $wine): float;
+    public function getTotalQuantityForWine(Wine $wine): int;
 
     public function getTotalCostForWine(Wine $wine, bool $formatted): float|string;
 
@@ -26,6 +26,8 @@ interface CartRepositoryInterface
     public function hasProduct(Wine $wine): bool;
 
     public function getCart(): Collection;
+
+    public function isEmpty(): bool;
 
     public function clear(): void;
 }

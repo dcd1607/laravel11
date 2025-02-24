@@ -8,11 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use App\Services\UploadService;
+use App\Traits\WithCurrencyFormatter;
 
 
 class Wine extends Model
 {
     use HasSlug;
+    use WithCurrencyFormatter;
 
     protected $fillable = [
         'category_id',
@@ -46,11 +48,9 @@ class Wine extends Model
     }
 
     public function formattedPrice(): Attribute
-    {
-        $formatter = new \NumberFormatter('es_ES', \NumberFormatter::CURRENCY);
-        
+    {        
         return Attribute::make(
-            get: fn ()=> $formatter->formatCurrency($this->price, 'EUR'),   
+            get: fn ()=> $this->formatCurrency($this->price, 'EUR'),   
         );
     }
 
